@@ -20,6 +20,7 @@ class _AddCredentialSheetState extends State<AddCredentialSheet> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _showPassword = false;
+  bool _showErrorMessage = false;
 
   final List<Color> cardColors = [
     const Color(0xFFFF9ECD),
@@ -33,6 +34,9 @@ class _AddCredentialSheetState extends State<AddCredentialSheet> {
     if (_headingController.text.isEmpty ||
         _emailController.text.isEmpty ||
         _passwordController.text.isEmpty) {
+      setState(() {
+        _showErrorMessage = true;
+      });
       return;
     }
 
@@ -115,6 +119,33 @@ class _AddCredentialSheetState extends State<AddCredentialSheet> {
             _buildTextField(
                 'Password/Pin*', Icons.lock, _passwordController, true),
             const SizedBox(height: 24),
+            if (_showErrorMessage)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.red[100],
+                    border: Border.all(color: Colors.red, width: 2),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    'Please fill in all fields',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
             Container(
               decoration: BoxDecoration(
                 color: const Color(0xFFFFE566),

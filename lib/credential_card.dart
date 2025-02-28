@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'add_credential.dart';
+import 'edit_credential.dart';
+import 'models/credential.dart';
 import 'services/storage_service.dart';
 
 class CredentialCard extends StatefulWidget {
@@ -221,6 +222,23 @@ class _CredentialCardState extends State<CredentialCard> {
     );
   }
 
+  void _showEditCredentialSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => EditCredentialSheet(
+        credential: Credential(
+          heading: widget.heading,
+          email: widget.email,
+          password: widget.password,
+          color: widget.color.value,
+        ),
+        onCredentialUpdated: widget.onCredentialAdded,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -258,6 +276,27 @@ class _CredentialCardState extends State<CredentialCard> {
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                GestureDetector(
+                  onTap: () => _showEditCredentialSheet(context),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(2, 2),
+                          blurRadius: 0,
+                        ),
+                      ],
+                    ),
+                    child:
+                        const Icon(Icons.edit, size: 20, color: Colors.black),
                   ),
                 ),
                 const SizedBox(width: 12),
