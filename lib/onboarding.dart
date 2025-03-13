@@ -37,8 +37,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _completeOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('hasSeenOnboarding', true);
+
+    // Redirect to Agreement Page instead of PIN setup
     if (mounted) {
-      Navigator.pushReplacementNamed(context, '/setPin');
+      Navigator.pushReplacementNamed(context, '/agreement');
     }
   }
 

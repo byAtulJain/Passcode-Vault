@@ -78,7 +78,8 @@ class SettingsPage extends StatelessWidget {
                   context,
                   'Privacy Policy',
                   'assets/privacy_policy.png',
-                  () => _launchUrl('https://your-privacy-policy-url.com'),
+                  () => _launchUrl(
+                      'https://sites.google.com/view/passcode-privacy-policy?usp=sharing'),
                   Colors.blue[100]!,
                 ),
                 const SizedBox(height: 16),

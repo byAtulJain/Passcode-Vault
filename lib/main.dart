@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'agreement_page.dart';
 import 'services/storage_service.dart';
 import 'enter_pin.dart';
 import 'set_pin.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/setPin': (context) => const SetPinPage(),
         '/enterPin': (context) => const EnterPinPage(),
         '/passcode': (context) => const PasscodePage(),
+        '/agreement': (context) => const AgreementPage(), // <-- New route
       },
     );
   }
